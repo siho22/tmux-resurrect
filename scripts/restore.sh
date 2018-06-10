@@ -175,6 +175,7 @@ restore_pane() {
 				# happens only for the first pane if it's the only registered pane for the whole tmux server
 				local pane_id="$(tmux display-message -p -F "#{pane_id}" -t "$session_name:$window_number")"
 				new_pane "$session_name" "$window_number" "$window_name" "$dir" "$pane_index"
+				tmux rename-window -t "${session_name}:${window_number}" "$window_name"
 				tmux kill-pane -t "$pane_id"
 			else
 				# Pane exists, no need to create it!
